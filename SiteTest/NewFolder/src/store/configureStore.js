@@ -1,11 +1,16 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { captchaReducer } from "../components/captcha/reducer";
+
+
+
+
 window.devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;
 
 export default function configureStore(history, initialState) {
     const reducers = {
-
+        captcha: captchaReducer,
     };
 
     const middleware = [
