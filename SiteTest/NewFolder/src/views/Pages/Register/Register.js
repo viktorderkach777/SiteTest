@@ -50,8 +50,8 @@ class Register extends Component {
     const { keyValue } = this.props.captcha;
 
     let errors = {};
-  
-   
+
+
     if (captchaText === "") errors.captchaText = "Поле не може бути пустим!";
 
     const isValid = Object.keys(errors).length === 0;
