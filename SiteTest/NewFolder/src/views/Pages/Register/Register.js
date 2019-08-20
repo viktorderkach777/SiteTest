@@ -7,6 +7,8 @@ import get from 'lodash.get';
 import CaptchaWidget from '../../../components/captcha';
 import CaptchaService from '../../../components/captcha/captchaService';
 import * as captchaActions from '../../../components/captcha/reducer';
+import { serverUrl } from '../../../config';
+
 import axios from 'axios';
 
 class Register extends Component {
@@ -65,7 +67,7 @@ class Register extends Component {
         captchaKey: keyValue
       };
       console.log('model send data', model);
-      var url = "https://localhost:44345/api/account/register";
+      var url = `${serverUrl}api/account/register`;
       axios.post(url, model)
         .then(() => this.setState({
           done: true
