@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SiteTest.Enteties;
 using SiteTest.Helpers;
 
 namespace SiteTest
@@ -23,6 +26,17 @@ namespace SiteTest
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
+
+            services.AddDbContext<EFContext>(opt =>
+              opt.UseSqlServer(Configuration
+                  .GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<DbUser, DbRole>(options =>
+                                    options.Stores.MaxLengthForKeys = 128)
+                .AddEntityFrameworkStores<EFContext>()
+                .AddDefaultTokenProviders();
+
+
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

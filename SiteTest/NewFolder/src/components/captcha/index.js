@@ -10,13 +10,18 @@ class CaptchaWidgetContainer extends Component {
          }
     }
 
-    static getDerivedStateFromProps(nextProps, prevState){
-        if(nextProps.keyValue!==prevState.keyValue) {
-          return { keyValue: nextProps.keyValue};
-       }
-       else return null;
-     }
+    // static getDerivedStateFromProps(nextProps, prevState){
+    //     if(nextProps.keyValue!==prevState.keyValue) {
+    //       return { keyValue: nextProps.keyValue};
+    //    }
+    //    else return null;
+    //  }
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.keyValue !== nextProps.keyValue) {
+            this.setState({ keyValue: nextProps.keyValue });
+        }
+    }
     
     render() { 
         const { isKeyLoading } = this.props;
